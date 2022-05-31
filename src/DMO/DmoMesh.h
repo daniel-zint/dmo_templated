@@ -1,5 +1,8 @@
 #pragma once
 
+#include <stdexcept>
+#include <sstream>
+
 
 #include "DmoVector.h"
 #include "Vertex.h"
@@ -100,9 +103,12 @@ namespace DMO {
 
                 v.oneRingSize = oneRingCounter - v.oneRingID;
                 if( v.oneRingSize >= MAX_ONE_RING_SIZE ) {
-                    LOG( WARNING ) << "One ring is larger than the maximal allowed one ring size\n"
-                                   << "    v.oneRingSize = " << v.oneRingSize << "\n    MAX_ONE_RING_SIZE = " << MAX_ONE_RING_SIZE
-                                   << "\nAdjust MAX_ONE_RING_SIZE for DMO to run correctly";
+                    std::stringstream error_msg;
+                    error_msg   << "One ring is larger than the maximal allowed one ring size\n"
+                                << "    v.oneRingSize = " << v.oneRingSize << "\n    MAX_ONE_RING_SIZE = " << MAX_ONE_RING_SIZE
+                                << "\nAdjust MAX_ONE_RING_SIZE for DMO to run correctly";
+
+                    throw std::invalid_argument(error_msg.str());
                 }
             }
         }
@@ -169,9 +175,12 @@ namespace DMO {
 
                 v.oneRingSize = oneRingCounter - v.oneRingID;
                 if( v.oneRingSize >= MAX_ONE_RING_SIZE ) {
-                    LOG( WARNING ) << "One ring is larger than the maximal allowed one ring size\n"
-                                   << "    v.oneRingSize = " << v.oneRingSize << "\n    MAX_ONE_RING_SIZE = " << MAX_ONE_RING_SIZE
-                                   << "\nAdjust MAX_ONE_RING_SIZE for DMO to run correctly";
+                    std::stringstream error_msg;
+                    error_msg   << "One ring is larger than the maximal allowed one ring size\n"
+                                << "    v.oneRingSize = " << v.oneRingSize << "\n    MAX_ONE_RING_SIZE = " << MAX_ONE_RING_SIZE
+                                << "\nAdjust MAX_ONE_RING_SIZE for DMO to run correctly";
+
+                    throw std::invalid_argument(error_msg.str());
                 }
             }
         }
