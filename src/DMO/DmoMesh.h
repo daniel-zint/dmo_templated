@@ -3,6 +3,7 @@
 #include "DmoVector.h"
 #include "Vertex.h"
 #include "Set.h"
+#include "DmoParams.h"
 
 #include <OpenMesh/Core/Mesh/PolyMesh_ArrayKernelT.hh>
 
