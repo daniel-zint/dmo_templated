@@ -1,8 +1,13 @@
 #pragma once
 
+#include <stdexcept>
+#include <sstream>
+
+
 #include "DmoVector.h"
 #include "Vertex.h"
 #include "Set.h"
+#include "DmoParams.h"
 
 #include <OpenMesh/Core/Mesh/PolyMesh_ArrayKernelT.hh>
 
@@ -27,7 +32,7 @@ namespace DMO {
             createColoring( vhs );
         }
 
-        template<typename MeshT, int set = Set::Inner> static DmoMesh create( MeshT& mesh ) {
+        template<typename MeshT, int set = Set::Inner> static DmoMesh create(const MeshT& mesh ) {
             DmoMesh<useGPU> m;
             m.copyMeshData<MeshT, set>( mesh );
             m.createColoring<MeshT, set>( mesh );
@@ -98,14 +103,17 @@ namespace DMO {
 
                 v.oneRingSize = oneRingCounter - v.oneRingID;
                 if( v.oneRingSize >= MAX_ONE_RING_SIZE ) {
-                    LOG( WARNING ) << "One ring is larger than the maximal allowed one ring size\n"
-                                   << "    v.oneRingSize = " << v.oneRingSize << "\n    MAX_ONE_RING_SIZE = " << MAX_ONE_RING_SIZE
-                                   << "\nAdjust MAX_ONE_RING_SIZE for DMO to run correctly";
+                    std::stringstream error_msg;
+                    error_msg   << "One ring is larger than the maximal allowed one ring size\n"
+                                << "    v.oneRingSize = " << v.oneRingSize << "\n    MAX_ONE_RING_SIZE = " << MAX_ONE_RING_SIZE
+                                << "\nAdjust MAX_ONE_RING_SIZE for DMO to run correctly";
+
+                    throw std::invalid_argument(error_msg.str());
                 }
             }
         }
 
-        template<typename MeshT, int set> void copyMeshData( MeshT& mesh ) {
+        template<typename MeshT, int set> void copyMeshData(const MeshT& mesh ) {
             int nVertices        = 0;
             int oneRingVecLength = 0;
 
@@ -167,9 +175,12 @@ namespace DMO {
 
                 v.oneRingSize = oneRingCounter - v.oneRingID;
                 if( v.oneRingSize >= MAX_ONE_RING_SIZE ) {
-                    LOG( WARNING ) << "One ring is larger than the maximal allowed one ring size\n"
-                                   << "    v.oneRingSize = " << v.oneRingSize << "\n    MAX_ONE_RING_SIZE = " << MAX_ONE_RING_SIZE
-                                   << "\nAdjust MAX_ONE_RING_SIZE for DMO to run correctly";
+                    std::stringstream error_msg;
+                    error_msg   << "One ring is larger than the maximal allowed one ring size\n"
+                                << "    v.oneRingSize = " << v.oneRingSize << "\n    MAX_ONE_RING_SIZE = " << MAX_ONE_RING_SIZE
+                                << "\nAdjust MAX_ONE_RING_SIZE for DMO to run correctly";
+
+                    throw std::invalid_argument(error_msg.str());
                 }
             }
         }
@@ -239,7 +250,7 @@ namespace DMO {
             }
         }
 
-        template<typename MeshT, int set> void createColoring( MeshT& mesh ) {
+        template<typename MeshT, int set> void createColoring(const MeshT& mesh ) {
             // create coloring scheme
             std::vector<int> colorScheme( mesh.n_vertices(), -2 );
 
