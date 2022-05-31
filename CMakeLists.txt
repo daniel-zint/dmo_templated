@@ -59,10 +59,7 @@ if(NOT OpenMP_FOUND)
 endif()
 
 if(NOT MSVC)
-	#X11
-	MESSAGE(STATUS "Add X11 and stdc++fs for non windows systems")
-	find_package(X11 REQUIRED)
-	set(LIBS ${LIBS} X11)
+	MESSAGE(STATUS "Add stdc++fs for non windows systems")
 	set(LIBS ${LIBS} stdc++fs)
 endif()
 
