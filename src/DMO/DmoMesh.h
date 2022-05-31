@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include "DmoVector.h"
 #include "Vertex.h"
 #include "Set.h"
@@ -28,7 +29,7 @@ namespace DMO {
             createColoring( vhs );
         }
 
-        template<typename MeshT, int set = Set::Inner> static DmoMesh create( MeshT& mesh ) {
+        template<typename MeshT, int set = Set::Inner> static DmoMesh create(const MeshT& mesh ) {
             DmoMesh<useGPU> m;
             m.copyMeshData<MeshT, set>( mesh );
             m.createColoring<MeshT, set>( mesh );
@@ -106,7 +107,7 @@ namespace DMO {
             }
         }
 
-        template<typename MeshT, int set> void copyMeshData( MeshT& mesh ) {
+        template<typename MeshT, int set> void copyMeshData(const MeshT& mesh ) {
             int nVertices        = 0;
             int oneRingVecLength = 0;
 
@@ -240,7 +241,7 @@ namespace DMO {
             }
         }
 
-        template<typename MeshT, int set> void createColoring( MeshT& mesh ) {
+        template<typename MeshT, int set> void createColoring(const MeshT& mesh ) {
             // create coloring scheme
             std::vector<int> colorScheme( mesh.n_vertices(), -2 );
 
