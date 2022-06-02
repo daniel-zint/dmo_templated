@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined(_DMO_USE_CUD) && !defined(_FORCE_CPU_USAGE)
+#if defined(_DMO_USE_CUDA) && !defined(_FORCE_CPU_USAGE)
 #include "DMO/Solver.h"
     namespace utility {
     constexpr bool use_GPU = true;

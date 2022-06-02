@@ -8,6 +8,7 @@ if(DMO_USE_CUDA)
     set(EXEC_FILES
         main.cpp
         registerDMO.cu
+        switch_DMO_CPU_GPU.h
         UserMetrics.h
         )
 
@@ -35,12 +36,12 @@ if(DMO_USE_CUDA)
     endif()
 endif()
 
-
 set(EXEC_NAME ex_03_easy_switch_CPU)
 
 set(EXEC_FILES
     main.cpp
     UserMetrics.h
+    switch_DMO_CPU_GPU.h
     )
 
 #add project executable
