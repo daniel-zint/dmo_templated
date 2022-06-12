@@ -2,7 +2,7 @@ set(BASE_DIRECTORY "${CMAKE_SOURCE_DIR}")
 configure_file(baseDirectory.h.in baseDirectory.h)
 
 if(DMO_USE_CUDA)
-    set(EXEC_NAME ex_03_easy_switch_GPU)
+    set(EXEC_NAME ex03_easy_switch_GPU)
 
 
     set(EXEC_FILES
@@ -36,7 +36,7 @@ if(DMO_USE_CUDA)
     endif()
 endif()
 
-set(EXEC_NAME ex_03_easy_switch_CPU)
+set(EXEC_NAME ex03_easy_switch_CPU)
 
 set(EXEC_FILES
     main.cpp

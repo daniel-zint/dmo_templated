@@ -6,7 +6,7 @@
  * The user can define own metrics, see UserMetrics.h. The metrics must be registered.
  *
  * A constexpr bool variable utility::use_GPU is provided in combination with an unified
- * name for accessing DMO::Solver and DMO::SolverCPU by calling utility::Solver.
+ * name for accessing DMO::Solver and DMO::SolverCPU by calling utility::MyDMO.
  *
  * !!! All metric-files must be included after include of switch_DMO_CPU_GPU.h !!!
  */
@@ -40,7 +40,7 @@ int main( int argc, char* argv[] ) {
 
     std::cout << "Start solver" << std::endl;
 
-    utility::Solver<decltype(mesh), decltype(myMetric)>( mesh, &myMetric, &dmoMeshAll ).solve( 100 );
+    utility::MyDMO( mesh, &myMetric, &dmoMeshAll ).solve( 100 );
    
     std::cout << "Finish solver" << std::endl;
 
