@@ -20,10 +20,11 @@ if(DMO_USE_CUDA)
         ${OPENMESH_INCLUDE_DIRS}
     )
 
-    target_link_libraries(DMO INTERFACE
-		CUDA::cudart
-        OpenMP::OpenMP_CXX
-	)
+    target_link_libraries(DMO INTERFACE CUDA::cudart)
+
+    if(OpenMP_CXX_FOUND)
+        target_link_libraries(DMO INTERFACE OpenMP::OpenMP_CXX)
+    endif()
 
     target_link_libraries(DMO PRIVATE
         ${OPENMESH_LIBRARIES} 
@@ -51,10 +52,12 @@ else()
         add_custom_target(DMO_headers SOURCES ${DMO_SRC_FILES})
     endif()
 
-    target_link_libraries(DMO INTERFACE
-        ${OPENMESH_LIBRARIES} 
-        OpenMP::OpenMP_CXX
-    )
+    target_link_libraries(DMO INTERFACE ${OPENMESH_LIBRARIES})
+
+    if(OpenMP_CXX_FOUND)
+        target_link_libraries(DMO INTERFACE OpenMP::OpenMP_CXX)
+    endif()
+
 
     target_compile_definitions(DMO INTERFACE -D_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING)
 endif()
