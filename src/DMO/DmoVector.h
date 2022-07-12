@@ -30,6 +30,8 @@ namespace DMO {
       public:
         const auto& h() const { return h_; }
         auto& h() { return h_; }
+
+        void copyHostToDevice(){}
     };
 
 #ifdef _DMO_USE_CUDA
