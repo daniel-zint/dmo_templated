@@ -7,3 +7,5 @@ if(DMO_USE_CUDA)
     add_subdirectory(ex01_Basic)
     add_subdirectory(ex02_UserMetric)
 endif()
+
+add_subdirectory(ex03_easy_switch)
