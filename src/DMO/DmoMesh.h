@@ -197,22 +197,11 @@ namespace DMO {
 
             for( const auto& vh: vhs ) {
                 unsigned long colorBits = 0;
-                auto heh                = vh.out().prev().opp().next();
-                const auto heh_init     = heh;
-                do {
-                    int c = colorScheme[heh.from().idx()];
+                for( auto vv: vh.vertices() ) {
+                    int c = colorScheme[vv.idx()];
                     if( c >= 0 )
                         colorBits |= 1 << c;
-                    heh = heh.next();
-                    if( heh.to() == vh ) {
-                        heh = heh.opp();
-                        if( heh.is_boundary() )
-                            break;
-                        else
-                            heh = heh.next();
-                    }
-                } while( heh != heh_init );
-
+                }
                 int color = 0;
                 while( ( colorBits & ( 1 << color ) ) ) {
                     ++color;
@@ -270,22 +259,11 @@ namespace DMO {
                     continue;
 
                 unsigned long colorBits = 0;
-                auto heh                = vh.out().prev().opp().next();
-                const auto heh_init     = heh;
-                do {
-                    int c = colorScheme[heh.from().idx()];
+                for( auto vv: vh.vertices() ) {
+                    int c = colorScheme[vv.idx()];
                     if( c >= 0 )
                         colorBits |= 1 << c;
-                    heh = heh.next();
-                    if( heh.to() == vh ) {
-                        heh = heh.opp();
-                        if( heh.is_boundary() )
-                            break;
-                        else
-                            heh = heh.next();
-                    }
-                } while( heh != heh_init );
-
+                }
                 int color = 0;
                 while( ( colorBits & ( 1 << color ) ) ) {
                     ++color;
