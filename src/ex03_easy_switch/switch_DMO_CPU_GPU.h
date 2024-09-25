@@ -2,7 +2,7 @@
 
 /*
  * Depending on the available resources and the explicit choice of compute location makes the appropriate backend solver for DMO
- * accessable through utility::MyDMOSolver, with standard template argument deduction, leading to nice to read syntax.
+ * accessable through myDMO::Solver, with standard template argument deduction, leading to nice to read syntax.
  */
 
 #include "DMO/SolverCPU.h"
@@ -19,7 +19,7 @@ namespace DMO {
 
 #include <type_traits>
 
-namespace utility {
+namespace myDMO {
     constexpr bool use_GPU = IMPL_SWITCH_DMO_USE_GPU;
 
     namespace {
@@ -29,16 +29,16 @@ namespace utility {
 
     // dervies the to be used class while inheriting the constructors and making them available
     template<typename MeshT, typename MetricT, typename Metric2T = DMO::Metrics::NoMetric>
-    class MyDMOSolver : public ImplSolverBase<MeshT, MetricT, Metric2T> {
+    class Solver : public ImplSolverBase<MeshT, MetricT, Metric2T> {
       public:
         using ImplSolverBase<MeshT, MetricT, Metric2T>::ImplSolverBase;
     };
 
     // explicit deduction guide for easy use
     template<typename MeshT, typename MetricT, typename Metric2T = DMO::Metrics::NoMetric>
-    MyDMOSolver( MeshT& mesh, MetricT* metric1, DMO::DmoMesh<use_GPU>* dmoMesh1, Metric2T* metric2 = nullptr,
-                 DMO::DmoMesh<use_GPU>* dmoMesh2 = nullptr ) -> MyDMOSolver<MeshT, MetricT, Metric2T>;
+    Solver( MeshT& mesh, MetricT* metric1, DMO::DmoMesh<use_GPU>* dmoMesh1, Metric2T* metric2 = nullptr, DMO::DmoMesh<use_GPU>* dmoMesh2 = nullptr )
+        -> Solver<MeshT, MetricT, Metric2T>;
 
-}    // namespace utility
+}    // namespace myDMO
 
 #undef IMPL_SWITCH_DMO_USE_GPU
