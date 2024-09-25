@@ -40,7 +40,7 @@ int main( int argc, char* argv[] ) {
 
     std::cout << "Start solver" << std::endl;
 
-    utility::MyDMO( mesh, &myMetric, &dmoMeshAll ).solve( 100 );
+    utility::MyDMOSolver( mesh, &myMetric, &dmoMeshAll ).solve( 100 );
    
     std::cout << "Finish solver" << std::endl;
 
@@ -56,7 +56,7 @@ int main( int argc, char* argv[] ) {
      */
     //DMO::DmoMesh<utility::use_GPU> dmoMeshInner = DMO::DmoMesh<utility::use_GPU>::create<TriMesh, DMO::Set::Inner>( mesh );
     //DMO::DmoMesh<utility::use_GPU> dmoMeshBound = DMO::DmoMesh<utility::use_GPU>::create<TriMesh, DMO::Set::Boundary>( mesh );
-    //utility::MyDMO( mesh, &myMetric, &dmoMeshInner, &myMetric, &dmoMeshBound ).solve( 100 );
+    //utility::MyDMOSolver( mesh, &myMetric, &dmoMeshInner, &myMetric, &dmoMeshBound ).solve( 100 );
 
     OpenMesh::IO::write_mesh( mesh, "examples/out.off" );
 }
