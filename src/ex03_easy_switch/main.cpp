@@ -1,5 +1,5 @@
 /*
- * DMO Example 04 - User Metrics on either CPU or GPU chosen at compile time, selecting the one available
+ * DMO Example 03 - User Metrics on either CPU or GPU chosen at compile time, selecting the one available
  *
  * The user may force CPU usage even if GPU is available by defining _FORCE_CPU_USAGE.
  *
