@@ -10,8 +10,10 @@
 #include <vector>
 
 namespace DMO {
-    // CPU kernel
-    template<typename MetricT> void dmoCPU( std::vector<float2>& points, DmoMesh<false>& dmoMesh1_, const MetricT& metric );
+    namespace detail {
+        // CPU kernel
+        template<typename MetricT> void dmoCPU( std::vector<float2>& points, DmoMesh<false>& dmoMesh1_, const MetricT& metric );
+    }    // namespace detail
 
     template<typename MeshT, typename MetricT, typename Metric2T = DMO::Metrics::NoMetric> class SolverCPU {
         MeshT& mesh_;
@@ -50,9 +52,9 @@ namespace DMO {
 
     template<typename MeshT, typename MetricT, typename Metric2T> void SolverCPU<MeshT, MetricT, Metric2T>::solve( int nIterations ) {
         for( int i = 0; i < nIterations; ++i ) {
-            dmoCPU<MetricT>( points_, *dmoMesh1_, *metric1_ );
+            detail::dmoCPU<MetricT>( points_, *dmoMesh1_, *metric1_ );
             if constexpr( !std::is_same<Metric2T, DMO::Metrics::NoMetric>::value ) {
-                dmoCPU<Metric2T>( points_, *dmoMesh2_, *metric2_ );
+                detail::dmoCPU<Metric2T>( points_, *dmoMesh2_, *metric2_ );
             }
         }
 

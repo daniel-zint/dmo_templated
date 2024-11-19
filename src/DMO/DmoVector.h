@@ -9,8 +9,8 @@ namespace DMO {
 
 #ifdef _DMO_USE_CUDA
     template<typename T> class DmoVectorGPU {
-        thrust::host_vector<T> h_;
-        thrust::device_vector<T> d_;
+        std::vector<T> h_;
+        DMO::detail::device_vector<T> d_;
 
       public:
         const auto& h() const { return h_; }
@@ -20,7 +20,7 @@ namespace DMO {
 
         void copyHostToDevice() { d_ = h_; }
 
-        void copyDeviceToHost() { h_ = d_; }
+        void copyDeviceToHost() { thrust::copy( std::begin( d_ ), std::end( d_ ), std::begin( h_ ) ); }
     };
 #endif    // _DMO_USE_CUDA
 
