@@ -28,7 +28,7 @@ namespace DMO {
         DmoMesh<true>* dmoMesh2_;
 
       public:
-        Solver<MeshT, MetricT, Metric2T>( MeshT& mesh, MetricT* metric1, DmoMesh<true>* dmoMesh1, Metric2T* metric2 = nullptr,
+        Solver( MeshT& mesh, MetricT* metric1, DmoMesh<true>* dmoMesh1, Metric2T* metric2 = nullptr,
                                           DmoMesh<true>* dmoMesh2 = nullptr );
 
         void solve( int nIterations = 100 );
